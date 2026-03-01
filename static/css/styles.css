@@ -1,0 +1,248 @@
+/* Body Styling */
+body {
+    background: linear-gradient(135deg, #37474f, #546e7a); /* Darker gradient background */
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    color: #e0e0e0; /* Lighter text for dark mode */
+}
+
+/* Header */
+h1 {
+    text-align: center;
+    margin: 10px 0 10px;
+    font-size: 2.8em;
+    color: #80deea; /* Lighter blue for better contrast */
+    font-weight: 700;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Content Section */
+.content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 25px;
+    margin-bottom: 90px;
+    box-sizing: border-box;
+    background-color: #2c3e50; /* Darker background */
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Message Styling */
+.message {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #34495e; /* Darker message background */
+    border-left: 5px solid #80deea; /* Lighter blue accent */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.message:hover {
+    background-color: #4f5b62; /* Slightly lighter hover effect */
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
+
+.message p {
+    margin: 10px 0;
+    font-size: 1.2em;
+    line-height: 1.5;
+}
+
+.message strong {
+    font-weight: 600;
+    color: #80deea; /* Lighter color for strong text */
+}
+
+/* Feedback Buttons */
+.feedback-buttons {
+    margin-top: 15px;
+    text-align: right; /* Align feedback buttons to the right */
+}
+
+.feedback-buttons button {
+    font-size: 22px;
+    margin-left: 10px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: #80deea;
+    transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.feedback-buttons button:hover {
+    transform: scale(1.3);
+    color: #00838f; /* Darker cyan on hover */
+    background-color: #4f5b62; /* Darker background on hover */
+}
+
+/* Chatbox Styling */
+.chatbox {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #2c3e50; /* Darker chatbox background */
+    padding: 20px;
+    border-top: 1px solid #34495e; /* Darker border */
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+    border-radius: 15px 15px 0 0;
+    z-index: 10;
+}
+
+.chatbox form {
+    display: flex;
+    flex-direction: column; /* Stack elements for error messages */
+    width: 100%;
+}
+
+#query-div {
+    width: 100%;
+    display: flex;
+    flex-direction: row; /* Allow for error message below input */
+    gap: 12px;
+}
+
+.chatbox input {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #34495e; /* Darker border */
+    background-color: #455a64; /* Slightly darker input background */
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    color: #e0e0e0; /* Lighter text for input */
+}
+
+.chatbox input:focus {
+    outline: none;
+    border-color: #80deea; /* Lighter border on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.chatbox input::placeholder {
+    color: #b0bec5; /* Lighter placeholder text */
+}
+
+/* Error Message Styling */
+.error-message {
+    color: #f44336; /* Red color for error */
+    font-size: 14px;
+    margin-top: -5px;
+}
+
+/* Submit Button */
+.chatbox button {
+    padding: 15px 22px;
+    font-size: 16px;
+    background-color: #80deea; /* Lighter button */
+    color: #fff;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: flex-end;
+}
+
+.chatbox button:hover {
+    background-color: #0097a7; /* Darker button on hover */
+    transform: translateY(-3px);
+}
+
+/* Clear Chat Button */
+.clear-chat-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #e57373; /* Lighter red button */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.clear-chat-btn:hover {
+    background-color: #c62828; /* Darker red on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.2em;
+        margin: 20px 0;
+    }
+
+    .message {
+        font-size: 1.1em;
+        padding: 12px;
+    }
+
+    .chatbox input {
+        font-size: 15px;
+    }
+
+    .chatbox button {
+        font-size: 15px;
+        padding: 12px 20px;
+    }
+}
+
+/* Loading Indicator Styling */
+#loading-indicator {
+    background-color: #34495e;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.loading-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.loading-content p {
+    margin: 0;
+    font-size: 1.1em;
+    color: #80deea;
+    font-weight: 500;
+}
+
+/* Spinner Animation */
+.spinner {
+    width: 30px;
+    height: 30px;
+    border: 4px solid #455a64;
+    border-top: 4px solid #80deea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Disabled button state */
+.chatbox button:disabled {
+    background-color: #546e7a;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.chatbox button:disabled:hover {
+    background-color: #546e7a;
+    transform: none;
+}
