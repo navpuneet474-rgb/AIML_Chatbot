@@ -5,32 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI/ML Chatbot</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" >
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="/static/css/styles.css" rel="stylesheet">
 </head>
 
 <body>
     <h1>AI/ML Chatbot</h1>
-    <div class="content">
-        <ul>
-            {% for item in history | reverse %}
-            <li class="message">
-                <p><strong>Q:</strong> {{ item['query'] | format_query }}</p>
-                <p><strong>A:</strong> {{ item['answer']| format_answer | safe }}</p>
 
-                <div class="feedback-buttons">
-                    <button class="thumbs-up" data-id="{{ item['_id'] }}" 
-                        onclick="submitFeedback(this, 1)">👍</button>
-                    <button class="thumbs-down" data-id="{{ item['_id'] }}"
-                        onclick="submitFeedback(this, 0)">👎</button>                    
-                </div>
-            </li>
-            {% endfor %}
-        </ul>
+    <div class="main-layout">
+
+        <!-- ── LEFT: Chat History ── -->
+        <div class="content" id="chat-content">
+            <ul>
+                {% for item in history | reverse %}
+                <li class="message">
+                    <p><strong>Q:</strong> {{ item['query'] | format_query }}</p>
+                    <p><strong>A:</strong> {{ item['answer'] | format_answer | safe }}</p>
+                    <div class="feedback-buttons">
+                        <button class="thumbs-up" data-id="{{ item['_id'] }}"
+                            onclick="submitFeedback(this, 1)">👍</button>
+                        <button class="thumbs-down" data-id="{{ item['_id'] }}"
+                            onclick="submitFeedback(this, 0)">👎</button>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- ── RIGHT: Trending Sidebar ── -->
+        <div class="sidebar">
+            <div class="trending-box">
+                <h3>🔥 Trending Questions</h3>
+                {% if top_questions %}
+                <ul class="trending-list">
+                    {% for item in top_questions %}
+                    <li class="trending-item" onclick="fillQuery('{{ item.question }}')">
+                        <span class="trending-question">{{ item.question }}</span>
+                        <span class="freq-badge">{{ item.frequency }}x</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="no-trending">No trending questions yet. Start asking!</p>
+                {% endif %}
+            </div>
+        </div>
+
     </div>
 
+    <!-- ── Chatbox ── -->
     <div class="chatbox">
-        <!-- <button class="clear-chat-btn" onclick="clearChat()">Clear Chat</button> -->
         <div id="loading-indicator" style="display: none;">
             <div class="loading-content">
                 <div class="spinner"></div>
@@ -38,7 +62,7 @@
             </div>
         </div>
         <form method="POST" action="/" id="query-form" onsubmit="return submitQuery(event);">
-            <div id ="query-div">
+            <div id="query-div">
                 <label for="query" hidden>Ask your question:</label>
                 <input type="text" id="query" name="query" placeholder="Ask your question here..." required>
                 <button type="submit" id="ask-button">Ask</button>
@@ -46,7 +70,7 @@
         </form>
     </div>
 
-    <script src="/static/js/script.js"> </script>
+    <script src="/static/js/script.js"></script>
 </body>
 
 </html>

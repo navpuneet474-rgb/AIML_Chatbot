@@ -12,10 +12,19 @@ function submitFeedback(button, feedbackType) {
     });
 }
 
+// FEATURE 3: Fill query input when a trending question is clicked
+function fillQuery(question) {
+    const queryInput = document.getElementById("query");
+    queryInput.value = question;
+    queryInput.focus();
+    // Scroll down to the chatbox so user sees the input filled
+    queryInput.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
 // Validate input to prevent empty submissions
 function validateInput() {
     const queryInput = document.getElementById("query");
-    const appendMessageTo = document.getElementById("query-form")
+    const appendMessageTo = document.getElementById("query-form");
     const errorElement = document.querySelector('.error-message');
     if (!queryInput.value.trim()) {
         if (!errorElement) {
@@ -27,7 +36,7 @@ function validateInput() {
             errorMessage.style.marginTop = "10px";
             appendMessageTo.parentNode.appendChild(errorMessage);
         }
-        return false
+        return false;
     }
     return true;
 }
@@ -37,39 +46,29 @@ function submitQuery(event) {
         event.preventDefault();
         return false;
     } else {
-        // Show loading indicator
         const loadingIndicator = document.getElementById("loading-indicator");
         const queryInput = document.getElementById("query");
         const askButton = document.getElementById("ask-button");
-        
-        // Display loading message
+
         loadingIndicator.style.display = "block";
-        
-        // Disable button and clear input
         askButton.disabled = true;
         askButton.textContent = "Processing...";
-        
-        // Clear input box immediately
+
         setTimeout(() => {
             queryInput.value = "";
         }, 100);
-        
-        // Allow form to submit
+
         return true;
     }
 }
 
-// Keep user at bottom (near input box) when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    // Small delay to ensure page is fully rendered
-    setTimeout(function() {
-        // Scroll to the bottom of the content div
-        const contentDiv = document.querySelector('.content');
+// Scroll to bottom of chat and focus input on page load
+document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function () {
+        const contentDiv = document.getElementById("chat-content");
         if (contentDiv) {
             contentDiv.scrollTop = contentDiv.scrollHeight;
         }
-
-        // also focus on input
         const queryInput = document.getElementById("query");
         if (queryInput) {
             queryInput.focus();
